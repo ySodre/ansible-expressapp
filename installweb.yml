@@ -1,0 +1,95 @@
+---
+- hosts: web
+  become: yes 
+  vars_files:
+   - vars/default.yml
+  tasks:
+    - name: 'Update package'
+      apt: 
+        update_cache: yes
+    - name: 'Instalação de Pacotes na maquina WEB'
+      apt: 
+        name:
+         - php7.4
+         - php-pear
+         - php7.4-curl
+         - php7.4-gd
+         - php7.4-intl
+         - php7.4-xmlrpc
+         - php7.4-mysql
+         - apache2
+         - python3-mysqldb 
+         - wget
+         - zip
+         - curl
+         - vim
+    - name: 'Criação do diretório www'
+      file:
+        path: /srv/www
+        state: directory
+        owner: "{{ app_user }}"
+        mode: '0775'
+
+    - name: 'Download Document root da apalicação web express'
+      unarchive:
+        src: https://github.com/rogerramossilva/devops/raw/master/express.zip
+        dest: /srv/www
+        remote_src: yes
+    
+    - name: 'Substituição IP de conexão com banco'
+      replace:
+        path: /srv/www/express/backup.php
+        regexp: '192\.168\.1\.20'
+        replace: '192.168.10.127'
+
+    - name: 'Template criação virtual hosts'
+      template:
+        src: "files/express.conf"
+        dest: "/etc/apache2/sites-available/express.conf"
+    - name: 'Template Controle de direório /srv/www apache'
+      template:
+        src: "files/direxpress.conf"
+        dest: "/etc/apache2/conf-available/direxpress.conf"
+    - name: 'Arquivo hosts'
+      template:
+        src: "files/hostsweb.conf"
+        dest: "/etc/hosts"
+
+    - name: 'Habilitar site express'
+      shell: /usr/sbin/a2ensite express.conf
+      notify: Reload apache 
+
+    - name: 'Habilitar Configuração Express'
+      shell: /usr/sbin/a2enconf direxpress.conf
+      notify: Reload apache
+
+    - name: 'Habilita Modulo PHP7.4'
+      apache2_module:
+        state: present
+        name: php7.4
+      notify: Restart apache
+
+    - name: 'Habilita Modulo virtualHost'
+      apache2_module:
+        state: present
+        name: vhost_alias
+      notify: Restart apache 
+    
+    - name: 'Ajuse de Dono e Grupo do diretório /srv/www/express'
+      file: 
+        path: /srv/www/express
+        state: directory
+        recurse: yes
+        owner: www-data 
+        group: www-data
+
+  handlers:
+    - name: Reload apache 
+      service:
+        name: apache2
+        state: reloaded
+    - name: Restart apache
+      service:
+        name: apache2
+        state: restarted 
+  

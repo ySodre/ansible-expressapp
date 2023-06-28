@@ -1,0 +1,5 @@
+[web]
+192.168.10.123 ansible_user=vagrant ansible_ssh_private_key_file="/home/vagrant/.ssh/id_rsa"
+
+[banco]
+192.168.10.127 ansible_user=vagrant ansible_ssh_private_key_file="/home/vagrant/.ssh/id_rsa"
