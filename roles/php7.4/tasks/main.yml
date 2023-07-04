@@ -14,4 +14,5 @@
       - php7.4-intl
       - php7.4-xmlrpc
       - php7.4-mysql
+  become: true
 # tasks file for php7.4

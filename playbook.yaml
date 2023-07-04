@@ -1,0 +1,7 @@
+- hosts: banco
+  roles:
+    - mariadb
+    
+- hosts: web
+  roles:
+    - expressapp

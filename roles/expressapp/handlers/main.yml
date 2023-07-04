@@ -4,8 +4,10 @@
   service:
     name: apache2
     state: reloaded
+  become: true
 
 - name: Restart apache
   service:
     name: apache2
     state: restarted
+  become: true

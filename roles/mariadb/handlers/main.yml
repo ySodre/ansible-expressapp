@@ -4,4 +4,5 @@
     name: mysql 
     state: restarted 
     enabled: yes
+  become: true
 # handlers file for mariadb

@@ -1,2 +1,7 @@
 ---
+http_host: "asf.com"
+http_port: 80
+http_conf: "express.conf"
+disable_default: true
+app_user: "www-data"
 # defaults file for mariadb

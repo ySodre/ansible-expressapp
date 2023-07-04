@@ -1,10 +1,10 @@
 ---
-- name: 'Atualizando os repositórios'
+- name: 'Updating repositories'
   apt:
     update_cache: yes
   become: true
 
-- name: 'Instalando programas padrões'
+- name: 'Installing default programs'
   apt:
     name:
       - wget
@@ -12,3 +12,6 @@
       - tcpdump
       - nmap
       - zip
+      - net-tools
+    state: present
+  become: true
