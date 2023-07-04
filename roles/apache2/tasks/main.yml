@@ -1,2 +1,12 @@
 ---
+- name: 'Atualizando os repositórios'
+  apt:
+    update_cache: yes
+  become: true
+
+- name: 'Instalando o apache2'
+  apt:
+    name:
+      - apache2
+
 # tasks file for apache2

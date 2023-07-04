@@ -1,10 +1,10 @@
 ---
-- name: 'Atualizando os repositórios'
+- name: 'Updating repositories'
   apt:
     update_cache: yes
   become: true
 
-- name: 'Instalando o apache2'
+- name: 'Installing apache2'
   apt:
     name:
       - apache2
