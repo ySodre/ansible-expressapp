@@ -1,0 +1,14 @@
+---
+- name: 'Atualizando os repositórios'
+  apt:
+    update_cache: yes
+  become: true
+
+- name: 'Instalando programas padrões'
+  apt:
+    name:
+      - wget
+      - curl
+      - tcpdump
+      - nmap
+      - zip

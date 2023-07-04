@@ -1,0 +1,67 @@
+---
+- name: 'Atualizando os repositórios'
+  apt:
+    update_cache: yes
+  become: true
+
+- name: 'Instalando o apache2'
+  apt:
+    name:
+      - apache2
+
+- name: 'Creating the application directory'
+  file:
+    path: /srv/www
+    state: directory
+    owner: "{{ app_user }}"
+    mode: '0775'
+
+- name: 'Downloading the application source code'
+  unarchive:
+    src: https://github.com/rogerramossilva/devops/raw/master/express.zip
+    dest: /srv/www
+    remote_src: yes
+
+- name: 'Configuring the database IP'
+  replace:
+    path: /srv/www/express/backup.php
+    regexp: '192\.168\.1\.20'
+    replace: '{{ db_ip }}'
+
+- name: 'Importing virtual host template'
+  template:
+    src: "files/express.conf"
+    dest: "/etc/apache2/sites-available/express.conf"
+
+- name: 'Importing application directory configuration'
+  template:
+    src: "files/direxpress.conf"
+    dest: "/etc/apache2/conf-available/direxpress.conf"
+
+- name: 'Enabling express site'
+  shell: /usr/sbin/a2ensite express.conf
+  notify: Reload apache
+
+- name: 'Enabling php 7.4 module'
+  shell: /usr/sbin/a2enconf direxpress.conf
+  notify: Reload apache
+
+- name: 'Enabling virtualhost module'
+  apache2_module:
+    state: present
+    name: php7.4
+  notify: Restart apache
+
+- name: 'Adjusting folder permissions'
+  apache2_module:
+    state: present
+    name: vhost_alias
+  notify: Restart apache 
+
+- name: 'Owner and Group Adjustment of the /srv/www/express directory'
+  file: 
+    path: /srv/www/express
+    state: directory
+    recurse: yes
+    owner: www-data 
+    group: www-data

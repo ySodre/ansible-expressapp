@@ -1,0 +1,11 @@
+---
+# handlers file for expressapp
+- name: Reload apache 
+  service:
+    name: apache2
+    state: reloaded
+
+- name: Restart apache
+  service:
+    name: apache2
+    state: restarted

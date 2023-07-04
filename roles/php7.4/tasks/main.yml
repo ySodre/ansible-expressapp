@@ -1,0 +1,17 @@
+---
+- name: 'Atualizando repositórios'
+  apt:
+    update_cache: yes
+  become: true
+
+- name: 'Instalando PHP 7.4'
+  apt:
+    name:
+      - php7.4
+      - php-pear
+      - php7.4-curl
+      - php7.4-gd
+      - php7.4-intl
+      - php7.4-xmlrpc
+      - php7.4-mysql
+# tasks file for php7.4
