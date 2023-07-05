@@ -55,4 +55,11 @@
   notify: Restart Mysql
   become: true
 
+- name: 'Restarting data base'
+  service: 
+    name: mysql 
+    state: restarted 
+    enabled: yes
+  become: true
+
 # tasks file for mariadb
