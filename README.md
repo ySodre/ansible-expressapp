@@ -1,6 +1,6 @@
 # Projeto - Instalação da aplicação Web Allsafe Express
 
-O objetivo desse projeto é subir uma aplicação em um servidor apache2 que precisa se autenticar a um banco de dados mariadb.
+O objetivo desse projeto é fazer o deploy de uma aplicação web que faz consultas ao servido de banco de dados de maneira automatizada com o ansible.
 
 ## Conhecimentos utilizados
   <ul>
@@ -56,4 +56,31 @@ Nesse projeto existe apenas uma váriável de ambiente que é o IP do banco de d
     <li>#ansible-playbook -i hosts -e "db_ip=ip_db" playbook.yaml </li>
   </ul>
 
-  
+Ao finalizar você deverá ver o resultado das tarefas sem erros
+
+![image](https://github.com/ySodre/ansible-expressapp/assets/89286829/b0d45ff6-cd68-48fd-86a3-6e4eb3ac8ada)
+
+## Configuração DNS
+
+Como estamos trabalhando com IPs privados, será necessário editar o arquivo hosts da sua máquina e criar o apontamento necessário.
+
+Exemplo em windows. Caminho: C:\Windows\System32\drivers\etc\hosts
+
+![image](https://github.com/ySodre/ansible-expressapp/assets/89286829/925eb3f2-a15a-4452-8abc-4d9f9f0ad964)
+
+Exemplo em Linux. Caminho /etc/hosts
+
+![image](https://github.com/ySodre/ansible-expressapp/assets/89286829/d1124001-5bb0-4491-9f72-a42c7c9db640)
+
+## Resultado
+
+O resultado esperado é que ao digitar express.asf.com abra o website da aplicação e além disso na guia de backups precisa aparecer dois backups, validando a comunicação com o banco de dados.
+
+![image](https://github.com/ySodre/ansible-expressapp/assets/89286829/2a4ef44b-240f-4862-8c9c-9cc35e454de3)
+
+![image](https://github.com/ySodre/ansible-expressapp/assets/89286829/2dc13b09-1509-4099-b3d8-e09b18dd02a9)
+
+
+
+
+
