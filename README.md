@@ -53,7 +53,7 @@ O objetivo desse projeto é fazer o deploy de uma aplicação web que faz consul
 Nesse projeto existe apenas uma váriável de ambiente que é o IP do banco de dados então no momento da execução é necessário passar a váriavel informando qual o IP do servidor de banco de dados.
 
   <ul>
-    <li>#ansible-playbook -i hosts -e "db_ip=ip_db" playbook.yaml </li>
+    <li>#ansible-playbook -i hosts -e "db_ip=ip_db" playbook.yml </li>
   </ul>
 
 Ao finalizar você deverá ver o resultado das tarefas sem erros
