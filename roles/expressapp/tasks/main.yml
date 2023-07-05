@@ -67,13 +67,6 @@
   notify: Restart apache
   become: true
 
-- name: 'Adjusting folder permissions'
-  apache2_module:
-    state: present
-    name: vhost_alias
-  notify: Restart apache 
-  become: true
-
 - name: 'Owner and Group Adjustment of the /srv/www/express directory'
   file: 
     path: /srv/www/express
