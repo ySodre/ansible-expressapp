@@ -2,6 +2,8 @@
 
 O objetivo desse projeto é fazer o deploy de uma aplicação web que faz consultas ao servido de banco de dados de maneira automatizada com o ansible.
 
+![image](https://github.com/ySodre/ansible-expressapp/assets/89286829/121f1aac-2b68-493b-81c2-1789bf6c25e2)
+
 ## Conhecimentos utilizados
   <ul>
     <li>Ansible</li>
@@ -10,6 +12,7 @@ O objetivo desse projeto é fazer o deploy de uma aplicação web que faz consul
     <li>Apache2</li>
     <li>Banco de dados</li>
     <li>Par de chaves pública e privada</li>
+    <li>Vagrant</li>
   </ul>
 
 ## Configuração
