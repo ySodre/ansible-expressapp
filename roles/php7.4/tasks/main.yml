@@ -1,10 +1,10 @@
 ---
-- name: 'Atualizando repositórios'
+- name: 'Updating repositories'
   apt:
     update_cache: yes
   become: true
 
-- name: 'Instalando PHP 7.4'
+- name: 'Installing PHP 7.4'
   apt:
     name:
       - php7.4

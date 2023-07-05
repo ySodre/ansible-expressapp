@@ -49,6 +49,11 @@
   notify: Reload apache
   become: true
 
+- name: 'Enabling application directory'
+  shell: /usr/sbin/a2enconf direxpress.conf
+  notify: Reload apache
+  become: true
+
 - name: 'Habilita Modulo PHP7.4'
   apache2_module:
     state: present
